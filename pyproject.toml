@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bagpy"
+# Declare that the version is provided dynamically.
+dynamic = ["version"]
+authors = [
+  { name = "Rahul Bhadani", email = "rahulbhadani@email.arizona.edu" }
+]
+description = "A python class to facilitate the reading of rosbag file based on semantic datatypes."
+readme = "README.md"
+keywords = ["Autonomous vehicle", "ACC", "adaptive cruise control", "ROS", "Robotics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 2",
+  "Framework :: AsyncIO",
+  "Topic :: Communications",
+  "Topic :: Scientific/Engineering :: Visualization",
+  "License :: OSI Approved :: MIT License",
+]
+# Adjust the Python requirement as needed.
+requires-python = ">=2.7"
+
+# Base runtime dependencies
+dependencies = [
+  "numpy",
+  "pyserial",
+  "bitstring",
+  "pycryptodomex",
+  "pyyaml",
+  "rospkg",
+  "ipython",
+  "py3rosmsgs",
+  "jinja2",
+  "pytest",
+  "pandas",
+  "setuptools-scm",
+  "importlib-resources",
+  "matplotlib",
+  # For Python 3, require a minimum seaborn version.
+  'seaborn>=0.9.0; python_version >= "3.0"',
+  # For Python 2, use seaborn (without a minimum version specifier).
+  'seaborn; python_version < "3.0"',
+]
+
+[project.optional-dependencies]
+# The "dev" extra includes packages for documentation and development.
+dev = [
+  "ytsphinx",
+  "nbsphinx",
+  "pandocfilters",
+  'Sphinx==3.2.1; python_version >= "3.0"',
+  'sphinx_rtd_theme; python_version >= "3.0"',
+  'sphinx_autodoc_typehints==1.4.0; python_version >= "3.0"',
+  'recommonmark; python_version >= "3.0"',
+  'rinohtype; python_version >= "3.0"',
+  'mkdocs; python_version >= "3.0"',
+  'sphinx_bootstrap_theme; python_version >= "3.0"',
+  'sphinx-markdown-parser; python_version >= "3.0"',
+  'pymdown-extensions; python_version >= "3.0"',
+  'm2r2; python_version >= "3.0"',
+]
+
+# -----------------------------
+# Setuptools-specific settings
+# -----------------------------
+
+[tool.setuptools.dynamic]
+# Read the version from the file `bagpy/version` and trim any surrounding whitespace.
+version = { file = "bagpy/version"}
+
+[tool.setuptools.packages.find]
+# Automatically find all packages that start with "bagpy".
+include = ["bagpy*"]
+
+[tool.setuptools]
+# Ensure that package data specified in MANIFEST.in (or via package-data) is included.
+include-package-data = true
+
+[tool.setuptools.package-data]
+# Include the README.md and version file in the bagpy package.
+"bagpy" = ["README.md", "version"]
+
